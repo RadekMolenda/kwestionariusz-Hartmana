@@ -1,3 +1,23 @@
+$(document).ready(function(){ 
+
+ 
+
+    for (var i = 0; i < localStorage.length; i++){
+    var name1 = localStorage.key(i); 
+    var value1 = localStorage.getItem(localStorage.key(i));
+
+	var allRadiosWithAValue = $("input:radio[value=value1][name=name1]")
+    //check radios one by one using each method
+    allRadiosWithAValue.each(function() {
+      $(this).prop("checked", true);
+    });
+}
+
+
+
+} );
+
+
 
 function odpCzer(){window.open("czerwony.html")};
 function odpNieb(){window.open("niebieski.html")};
@@ -33,5 +53,14 @@ else if ( zolty> niebieski && zolty > bialy && zolty > czerwone){odpZol()}
 }
 
 
+$(document).ready(function(){ 
 
+    $('input').on('change', function(){    
+      localStorage.setItem($(this).attr("name"), $(this).attr("value"));    
+    });
+       
+ });
+
+
+ 
 

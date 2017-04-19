@@ -1,66 +1,64 @@
-$(document).ready(function(){ 
+$(document).ready(function(){
+  for (var i = 0; i < localStorage.length; i++){
+    var name = localStorage.key(i);
+    var value = localStorage.getItem(localStorage.key(i));
 
- 
-
-    for (var i = 0; i < localStorage.length; i++){
-    var name1 = localStorage.key(i); 
-    var value1 = localStorage.getItem(localStorage.key(i));
-
-	var allRadiosWithAValue = $("input:radio[value=value1][name=name1]")
+    var allRadiosWithAValue = $("input:radio[value=" + value + "][name=" + name +"]");
     //check radios one by one using each method
     allRadiosWithAValue.each(function() {
       $(this).prop("checked", true);
     });
-}
-
-
-
-} );
-
-
-
-function odpCzer(){window.open("czerwony.html")};
-function odpNieb(){window.open("niebieski.html")};
-function odpBial(){window.open("bialy.html")};
-function odpZol(){window.open("zolty.html")};
+  }
+});
 
 function submitAnswers() {
-	var radios = document.getElementsByName("q"+i) ;
-	
-	var czerwone =0;
-    var niebieski =0;
-    var bialy = 0;
-    var zolty =0;  
-    var result = $('input[type="radio"]:checked') 
- 
+  var radios,
+      radio,
+      odpowiedzi = {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0
+      },
+      result = $('input[type="radio"]:checked');
+
   for(var i = 0; i <= 45; i++) {
-  var radios = document.getElementsByName("q"+i);
-  for(var j = 0; j < radios.length; j++) {
-    var radio = radios[j];
-    if(radio.value == "A" && radio.checked) {czerwone +=1;}
-    else if (radio.value == "B" && radio.checked) {niebieski +=1;}
-    else if (radio.value == "C" && radio.checked) {bialy +=1;}
-    else if (radio.value == "D" && radio.checked) {zolty+=1;}}}
-if (result.length !=45 ) {alert("Nie wszystkie odpowiedzi zostały zaznaczone"); 
-return false}
-else if (czerwone > niebieski && czerwone > bialy && czerwone > zolty)
-	{odpCzer()}
-else if (niebieski > czerwone && niebieski > bialy && niebieski > zolty)
-	{odpNieb()}
-else if ( bialy> niebieski && bialy > czerwone && bialy > zolty){odpBial()}
-else if ( zolty> niebieski && zolty > bialy && zolty > czerwone){odpZol()}
-	
+    radios = document.getElementsByName("q"+i);
+    for(var j = 0; j < radios.length; j++) {
+      radio = radios[j];
+      if(radio.checked) {
+        odpowiedzi[radio.value] += 1;
+      }
+    }
+  }
+
+var arr = Object.keys( odpowiedzi ).map(function ( key ) { return odpowiedzi [key]; });
+var max = Math.max.apply( null, arr );
+
+  if (result.length !=45 ) {
+   alert("Nie wszystkie odpowiedzi zostały zaznaczone");
+    return false;
+  }
+
+switch (max){
+  case odpowiedzi.A:
+   window.open("czerwony.html");
+   break;
+  case odpowiedzi.B:
+   window.open("niebieski.html");
+   break;
+  case odpowiedzi.C:
+    window.open("bialy.html");
+    break;
+ case odpowiedzi.D:
+   window.open("zolty.html") ;
+    break;
+   }
 }
 
-
-$(document).ready(function(){ 
-
-    $('input').on('change', function(){    
-      localStorage.setItem($(this).attr("name"), $(this).attr("value"));    
-    });
-       
- });
-
-
- 
+$(document).ready(function(){
+  $('input').on('change', function(){
+    localStorage.setItem($(this).attr("name"), $(this).attr("value"));
+  });
+});
 

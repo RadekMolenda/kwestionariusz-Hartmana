@@ -11,19 +11,14 @@ $(document).ready(function(){
   }
 });
 
-function odpCzer(){ window.open("czerwony.html") };
-function odpNieb(){ window.open("niebieski.html") };
-function odpBial(){ window.open("bialy.html") };
-function odpZol(){ window.open("zolty.html") };
-
 function submitAnswers() {
   var radios,
       radio,
       odpowiedzi = {
-        "A": 0,
-        "B": 0,
-        "C": 0,
-        "D": 0
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0
       },
       result = $('input[type="radio"]:checked');
 
@@ -37,23 +32,28 @@ function submitAnswers() {
     }
   }
 
-  var czerwone = odpowiedzi["A"];
-  var niebieski = odpowiedzi["B"];
-  var bialy = odpowiedzi["C"];
-  var zolty = odpowiedzi["D"];
-  
+var arr = Object.keys( odpowiedzi ).map(function ( key ) { return odpowiedzi [key]; });
+var max = Math.max.apply( null, arr );
+
   if (result.length !=45 ) {
-    alert("Nie wszystkie odpowiedzi zostały zaznaczone");
+   alert("Nie wszystkie odpowiedzi zostały zaznaczone");
     return false;
-  } else if (czerwone > niebieski && czerwone > bialy && czerwone > zolty) {
-    odpCzer();
-  } else if (niebieski > czerwone && niebieski > bialy && niebieski > zolty) {
-    odpNieb();
-  } else if ( bialy> niebieski && bialy > czerwone && bialy > zolty) {
-    odpBial();
-  } else if ( zolty> niebieski && zolty > bialy && zolty > czerwone){
-    odpZol();
   }
+
+switch (max){
+  case odpowiedzi.A:
+   window.open("czerwony.html");
+   break;
+  case odpowiedzi.B:
+   window.open("niebieski.html");
+   break;
+  case odpowiedzi.C:
+    window.open("bialy.html");
+    break;
+ case odpowiedzi.D:
+   window.open("zolty.html") ;
+    break;
+   }
 }
 
 $(document).ready(function(){

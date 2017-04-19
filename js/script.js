@@ -61,4 +61,3 @@ $(document).ready(function(){
     localStorage.setItem($(this).attr("name"), $(this).attr("value"));
   });
 });
-

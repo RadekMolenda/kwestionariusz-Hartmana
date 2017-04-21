@@ -9,9 +9,19 @@ $(document).ready(function(){
       $(this).prop("checked", true);
     });
   }
+
+  $("#formularz").on('submit', function(event) {
+    return submitAnswers(event);
+  });
 });
 
-function submitAnswers() {
+function pokazWynik(kolor) {
+  $.get(kolor, function(wynik) {
+    $("#osobowosc").html(wynik);
+  })
+}
+
+function submitAnswers(event) {
   var radios,
       radio,
       odpowiedzi = {
@@ -21,6 +31,8 @@ function submitAnswers() {
         D: 0
       },
       result = $('input[type="radio"]:checked');
+
+  event.preventDefault();
 
   for(var i = 0; i <= 45; i++) {
     radios = document.getElementsByName("q"+i);
@@ -32,28 +44,28 @@ function submitAnswers() {
     }
   }
 
-var arr = Object.keys( odpowiedzi ).map(function ( key ) { return odpowiedzi [key]; });
-var max = Math.max.apply( null, arr );
+  var arr = Object.keys( odpowiedzi ).map(function ( key ) { return odpowiedzi [key]; });
+  var max = Math.max.apply( null, arr );
 
   if (result.length !=45 ) {
    alert("Nie wszystkie odpowiedzi zostały zaznaczone");
     return false;
   }
 
-switch (max){
+  switch (max){
   case odpowiedzi.A:
-   window.open("czerwony.html");
-   break;
+    pokazWynik("/czerwony.html");
+    break;
   case odpowiedzi.B:
-   window.open("niebieski.html");
-   break;
+    pokazWynik("/niebieski.html");
+    break;
   case odpowiedzi.C:
-    window.open("bialy.html");
+    pokazWynik("/bialy.html");
     break;
- case odpowiedzi.D:
-   window.open("zolty.html") ;
+  case odpowiedzi.D:
+    pokazWynik("/zolty.html");
     break;
-   }
+  }
 }
 
 $(document).ready(function(){

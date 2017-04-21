@@ -6,10 +6,7 @@
 <title>Kwestionariusz</title>
     <meta charset="utf-8">
 
-   <script
-  src="https://code.jquery.com/jquery-3.2.1.slim.js"
-  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
-  crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
    <link rel="stylesheet" href="css/style.css">
 
@@ -20,7 +17,7 @@
 
 </head>
 <body>
-<form name="quizForm" onsubmit="return submitAnswers()">
+<form name="quizForm" id="formularz">
   <div id="container">
     <header>
       <h1>Kwestonariusz osobowościowy Hartmana</h1>
@@ -377,12 +374,11 @@
         <br><br>
         <input type="radio" name="q45" value="D">d) Rozrywki, pracy sprawiającej przyjemność i towarzystwa innych ludzi.<br>
         <br>
-
       </article>
     </section>
     <input type=submit value="Wynik">
-    <br>
-    <br>
+    <section id="osobowosc">
+    </section>
   </div>
 </form>
 </body>
